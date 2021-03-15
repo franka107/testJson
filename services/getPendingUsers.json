@@ -1,0 +1,19 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "user",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "disabled": {
+              "$ne": true
+            },
+            "approvalState": "PENDING"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  }
+]

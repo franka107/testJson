@@ -1,0 +1,105 @@
+[
+  {
+    "action": "registerElement",
+    "outputAlias": "userData",
+    "params": {
+      "modelKey": "user",
+      "mappingSetup": {
+        "|&|name": "&.clientParams.name",
+        "|&|lastname": "&.clientParams.lastname",
+        "|&|rut": "&.clientParams.rut",
+        "|&|email": "&.clientParams.email",
+        "approvalState": "PENDING",
+        "|&|phone": "&.clientParams.phone",
+        "|&|mobilePhone": "&.clientParams.mobilePhone",
+        "|&|comment": "&.clientParams.comment",
+        "|&|type": "&.clientParams.type",
+        "|&|typeKey": "&.clientParams.typeKey",
+        "|&|regionKey": "&.clientParams.regionKey",
+        "|&|cityKey": "&.clientParams.cityKey",
+        "|&|communeKey": "&.clientParams.communeKey",
+        "|&|sectorKey": "&.clientParams.sectorKey",
+        "|&|website": "&.clientParams.website",
+        "|&|message": "&.clientParams.message",
+        "|&|photoUrl": "&.clientParams.photoUrl",
+        "|&|coverUrl": "&.clientParams.coverUrl",
+        "|&|birthDate": "&.clientParams.birthDate",
+        "|&|deliveryEnabled": "&.clientParams.deliveryEnabled",
+        "|&|personalDeliveryEnabled": "&.clientParams.personalDeliveryEnabled"
+      }
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "registerElement",
+    "outputAlias": "usercredentials",
+    "params": {
+      "modelKey": "usercredentials",
+      "mappingSetup": {
+        "|&|userId": "&.outputsMap.userData._id",
+        "type": "PASSWORD",
+        "credentials": {
+          "|$|password": {
+            "fnKey": "generateRandomString",
+            "params": {
+              "abc": "0123456789ABCDEF",
+              "size": 8
+            }
+          }
+        }
+      }
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "executeFunction",
+    "params": {
+      "functionKey": "sendBasicEmail",
+      "params": {
+        "subject": "Bienvenido a Caleta en Linea",
+        "|&|targetEmail": "&.outputsMap.userData.email",
+        "attachments": [],
+        "paragraphs": [
+          {
+            "text": "Hola! Bienvenido a Caleta en Linea"
+          },
+          {
+            "text": "Para acceder ingresa https://www.caletaenlinea.cl/inicio/#/login"
+          },
+          {
+            "|$|text": {
+              "fnKey": "concatText",
+              "params": {
+                "items": [
+                  {
+                    "text": "Email: "
+                  },
+                  {
+                    "|&|text": "&.outputsMap.userData.email"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "|$|text": {
+              "fnKey": "concatText",
+              "params": {
+                "items": [
+                  {
+                    "text": "Contraseña: "
+                  },
+                  {
+                    "|&|text": "&.outputsMap.usercredentials.credentials.password"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "buttons": []
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "comment",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "status": null
+          }
+        },
+        {
+          "$sort": {
+            "_timestamp": -1
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  }
+]

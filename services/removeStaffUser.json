@@ -1,0 +1,10 @@
+[
+  {
+    "action": "removeElementById",
+    "params": {
+      "modelKey": "staffuser",
+      "itemId": "&.clientParams.staffUserId"
+    },
+    "handlerVersion": "v1"
+  }
+]

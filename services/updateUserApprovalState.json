@@ -1,0 +1,14 @@
+[
+  {
+    "action": "updateElementById",
+    "params": {
+      "modelKey": "user",
+      "itemId": "&.clientParams.userId",
+      "updateData": {
+        "|&|approvalState": "&.clientParams.approvalState",
+        "|&|approvalStateDescription": "&.clientParams.approvalStateDescription"
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

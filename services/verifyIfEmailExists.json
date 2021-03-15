@@ -1,0 +1,16 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "user",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|email": "&.clientParams.email"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  }
+]

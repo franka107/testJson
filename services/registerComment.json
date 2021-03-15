@@ -1,0 +1,14 @@
+[
+  {
+    "action": "registerElement",
+    "params": {
+      "modelKey": "comment",
+      "mappingSetup": {
+        "|&|authorName": "&.clientParams.authorName",
+        "|&|authorEmail": "&.clientParams.authorEmail",
+        "|&|content": "&.clientParams.content"
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

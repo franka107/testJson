@@ -1,0 +1,13 @@
+[
+  {
+    "action": "updateElementById",
+    "params": {
+      "modelKey": "comment",
+      "itemId": "&.clientParams.commentId",
+      "updateData": {
+        "|&|status": "&.clientParams.status"
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

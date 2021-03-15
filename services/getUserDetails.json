@@ -1,0 +1,12 @@
+[
+  {
+    "action": "stopIfDoesntMatch",
+    "params": {
+      "match": false,
+      "onError": {
+        "status": 401,
+        "details": "Invalid token"
+      }
+    }
+  }
+]

@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "rut": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "businessLine": {
+      "type": "string"
+    },
+    "businessLegalName": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["FISHER", "MARKETER", "ORGANIZATION"]
+    },
+    "typeKey": {
+      "type": "string"
+    },
+    "approvalState": {
+      "type": "string",
+      "enum": ["PENDING", "APPROVED", "REJECTED"]
+    },
+    "approvalStateDescription": {
+      "type": "string"
+    },
+    "regionKey": {
+      "type": "string"
+    },
+    "cityKey": {
+      "type": "string"
+    },
+    "communeKey": {
+      "type": "string"
+    },
+    "sectorKey": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "photoUrl": {
+      "type": "string"
+    },
+    "deliveryEnabled": {
+      "type": "boolean"
+    },
+    "termsAccepted": {
+      "type": "boolean"
+    },
+    "personalDeliveryEnabled": {
+      "type": "boolean"
+    },
+    "coverUrl": {
+      "type": "string"
+    },
+    "birthDate": {
+      "type": "date"
+    }
+  },
+  "required": [
+    "name",
+    "lastname",
+    "rut",
+    "email",
+    "phone",
+    "type",
+    "approvalState"
+  ]
+}

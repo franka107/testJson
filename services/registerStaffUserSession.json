@@ -1,0 +1,64 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "staffuser",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|email": "&.clientParams.email",
+            "|&|password": "&.clientParams.password"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "staffUserData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.staffUserData"
+        }
+      },
+      "onError": {
+        "status": 401,
+        "details": "Invalid credentials"
+      }
+    }
+  },
+  {
+    "action": "registerElement",
+    "outputAlias": "staffusersession",
+    "params": {
+      "modelKey": "staffusersession",
+      "mappingSetup": {
+        "|&|staffUserId": "&.outputsMap.staffUserData._id",
+        "|$|key": {
+          "fnKey": "generateRandomString",
+          "params": {
+            "size": 30
+          }
+        }
+      }
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "setCookiesWhenRequired",
+    "params": {
+      "mappingSetup": {
+        "|&|clsk": "&.outputsMap.staffusersession.key"
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "action": "elementsAggregation",
+    "outputAlias": "sessionData",
+    "params": {
+      "modelKey": "staffusersession",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|key": "&.clientCookies.clsk",
+            "disabled": {
+              "$ne": true
+            }
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "redirectWhenMatch",
+    "params": {
+      "|$|match": {
+        "fnKey": "not",
+        "params": {
+          "|&|value": "&.outputsMap.sessionData.length"
+        }
+      },
+      "targetWhenMatch": "/staff-login"
+    },
+    "handlerVersion": "v1"
+  }
+]

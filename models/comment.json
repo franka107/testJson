@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "authorName": {
+      "type": "string"
+    },
+    "authorEmail": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "required": ["authorName", "authorEmail", "content"]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "action": "registerElement",
+    "params": {
+      "modelKey": "visit",
+      "mappingSetup": {
+        "new": true
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

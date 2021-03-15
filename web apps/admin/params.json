@@ -1,0 +1,1528 @@
+{
+  "title": "Sernapesca Admin",
+  "favicon": "https://ic-client-assets.s3.us-east-2.amazonaws.com/projects/prod/5fa2b530b934af000826dd26/webapps/caletaenlinea-inicio/myfavicon.ico",
+  "stylingSetup": {
+    "layout": {
+      "topBar": {
+        "logoUrl": "https://ic-client-assets.s3.us-east-2.amazonaws.com/manual-inserts/sernapesca-caletaenlinea-flags.png",
+        "logoHeight": "60%",
+        "backgroundGradient": ["#2372c5", "#155daf"],
+        "fontColor": "#FFFFFF"
+      },
+      "leftPanel": {
+        "backgroundColor": "#FFF",
+        "fontColor": "#555"
+      },
+      "contentContainer": {
+        "backgroundColor": "#F4F7FF",
+        "fontColor": "#333"
+      }
+    },
+    "elements": {
+      "table": {
+        "headerOptions": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        },
+        "header": {
+          "backgroundColor": "#2372c5",
+          "fontColor": "#FFF"
+        },
+        "items": {
+          "backgroundColor": "#FFF",
+          "fontColor": "#777"
+        },
+        "itemOptions": {
+          "fontColor": "#2372c5"
+        }
+      },
+      "form": {
+        "headerOptions": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        },
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        },
+        "inputs": {
+          "backgroundColor": "#f1f6f9",
+          "fontColor": "#555555"
+        },
+        "actions": {
+          "backgroundColor": "#2372c5",
+          "fontColor": "#FFFFFF"
+        }
+      },
+      "cards": {
+        "headerOptions": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        },
+        "card": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        }
+      },
+      "dashboard": {
+        "highlightedItems": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        },
+        "chartItems": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555",
+          "chartColor": {
+            "type": "hsl",
+            "setup": {
+              "h": {
+                "value": 200
+              },
+              "s": {
+                "value": 84
+              },
+              "l": {
+                "min": 15,
+                "max": 70
+              }
+            }
+          }
+        },
+        "maps": {
+          "styling": [
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#bdbdbd"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#ffffff"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dadada"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "stylers": [
+                {
+                  "color": "#015aa8"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#c9c9c9"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#22b0f6"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            }
+          ]
+        },
+        "headerOptions": {
+          "backgroundColor": "#FFFFFF",
+          "fontColor": "#555555"
+        },
+        "tableHeader": {
+          "backgroundColor": "#005aa8",
+          "fontColor": "#FFF"
+        },
+        "tableItems": {
+          "backgroundColor": "#FFF",
+          "fontColor": "#777"
+        },
+        "tableItemOptions": {
+          "fontColor": "#005aa8"
+        }
+      }
+    }
+  },
+  "layoutSetup": {
+    "title": "Panel administrativo",
+    "leftPanelImage": {
+      "url": "https://ic-client-assets.s3.us-east-2.amazonaws.com/manual-inserts/caleta-en-linea-nuevo-logo.jpg",
+      "height": "60px"
+    },
+    "user": {
+      "photo": "",
+      "name": "Admin",
+      "alias": "",
+      "options": []
+    }
+  },
+  "leftItems": [
+    {
+      "label": "Usuarios",
+      "icon": "fas fa-clipboard-list",
+      "childs": [
+        {
+          "label": "Solicitudes pendientes",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "user-requests"
+            }
+          }
+        },
+        {
+          "label": "Aprobados",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "approved-users"
+            }
+          }
+        },
+        {
+          "label": "Rechazados",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "rejected-users"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Suscriptores",
+      "icon": "fas fa-clipboard-list",
+      "childs": [
+        {
+          "label": "Últimos suscriptores",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "last-subscribers"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Comentarios",
+      "icon": "fas fa-clipboard-list",
+      "childs": [
+        {
+          "label": "Comentarios pendientes",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "comments-to-approve"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Usuarios",
+      "icon": "fas fa-user",
+      "childs": [
+        {
+          "label": "Lista de usuarios",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "staff-list"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "states": [
+    {
+      "key": "user-requests",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Solicitudes de usuarios",
+          "tableServiceDataStores": [
+            {
+              "key": "users",
+              "serviceName": "getPendingUsers",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.users",
+            "options": [
+              {
+                "label": "Ver",
+                "action": {
+                  "fnKey": "goToState",
+                  "params": {
+                    "externalTab": true,
+                    "stateName": "user-profile",
+                    "stateParams": {
+                      "|&|userId": "&.item._id"
+                    }
+                  }
+                }
+              }
+            ],
+            "mapping": [
+              {
+                "label": "Region",
+                "content": {
+                  "|&|data": "&.item.regionKey"
+                }
+              },
+              {
+                "label": "Comuna",
+                "content": {
+                  "|&|data": "&.item.communeKey"
+                }
+              },
+              {
+                "label": "Caleta",
+                "content": {
+                  "|&|data": "&.item.sectorKey"
+                }
+              },
+              {
+                "label": "Nombres",
+                "content": {
+                  "|&|data": "&.item.name"
+                }
+              },
+              {
+                "label": "Apellidos",
+                "content": {
+                  "|&|data": "&.item.lastname"
+                }
+              },
+              {
+                "label": "RUT",
+                "content": {
+                  "|&|data": "&.item.rut"
+                }
+              },
+              {
+                "label": "Email",
+                "content": {
+                  "|&|data": "&.item.email"
+                }
+              },
+              {
+                "label": "Teléfono",
+                "content": {
+                  "|&|data": "&.item.phone"
+                }
+              },
+              {
+                "label": "Tipo de Identificador",
+                "content": {
+                  "|$|data": {
+                    "fnKey": "concatText",
+                    "params": {
+                      "items": [
+                        {
+                          "|$|text": {
+                            "fnKey": "resolveSwitchCase",
+                            "params": {
+                              "|&|value": "&.item.type",
+                              "cases": [
+                                {
+                                  "condition": "FISHER",
+                                  "value": "Pescador"
+                                },
+                                {
+                                  "condition": "MARKETER",
+                                  "value": "Comercializador de la caleta"
+                                },
+                                {
+                                  "condition": "ORGANIZATION",
+                                  "value": "Organización"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "text": ": "
+                        },
+                        {
+                          "|&|text": "&.item.typeKey"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "approved-users",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Usuarios aprobados",
+          "tableServiceDataStores": [
+            {
+              "key": "users",
+              "serviceName": "getApprovedUsers",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.users",
+            "options": [
+              {
+                "label": "Ver",
+                "action": {
+                  "fnKey": "goToState",
+                  "params": {
+                    "externalTab": true,
+                    "stateName": "user-profile",
+                    "stateParams": {
+                      "|&|userId": "&.item._id"
+                    }
+                  }
+                }
+              }
+            ],
+            "mapping": [
+              {
+                "label": "Nombres",
+                "content": {
+                  "|&|data": "&.item.name"
+                }
+              },
+              {
+                "label": "Apellidos",
+                "content": {
+                  "|&|data": "&.item.lastname"
+                }
+              },
+              {
+                "label": "RUT",
+                "content": {
+                  "|&|data": "&.item.rut"
+                }
+              },
+              {
+                "label": "Email",
+                "content": {
+                  "|&|data": "&.item.email"
+                }
+              },
+              {
+                "label": "Teléfono",
+                "content": {
+                  "|&|data": "&.item.phone"
+                }
+              },
+              {
+                "label": "Tipo de Identificador",
+                "content": {
+                  "|$|data": {
+                    "fnKey": "concatText",
+                    "params": {
+                      "items": [
+                        {
+                          "|$|text": {
+                            "fnKey": "resolveSwitchCase",
+                            "params": {
+                              "|&|value": "&.item.type",
+                              "cases": [
+                                {
+                                  "condition": "FISHER",
+                                  "value": "Pescador"
+                                },
+                                {
+                                  "condition": "MARKETER",
+                                  "value": "Comercializador de la caleta"
+                                },
+                                {
+                                  "condition": "ORGANIZATION",
+                                  "value": "Organización"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "text": ": "
+                        },
+                        {
+                          "|&|text": "&.item.typeKey"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "rejected-users",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Usuarios rechazados",
+          "tableServiceDataStores": [
+            {
+              "key": "users",
+              "serviceName": "getRejectedUsers",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.users",
+            "options": [
+              {
+                "label": "Ver",
+                "action": {
+                  "fnKey": "goToState",
+                  "params": {
+                    "externalTab": true,
+                    "stateName": "user-profile",
+                    "stateParams": {
+                      "|&|userId": "&.item._id"
+                    }
+                  }
+                }
+              }
+            ],
+            "mapping": [
+              {
+                "label": "Nombres",
+                "content": {
+                  "|&|data": "&.item.name"
+                }
+              },
+              {
+                "label": "Apellidos",
+                "content": {
+                  "|&|data": "&.item.lastname"
+                }
+              },
+              {
+                "label": "RUT",
+                "content": {
+                  "|&|data": "&.item.rut"
+                }
+              },
+              {
+                "label": "Email",
+                "content": {
+                  "|&|data": "&.item.email"
+                }
+              },
+              {
+                "label": "Teléfono",
+                "content": {
+                  "|&|data": "&.item.phone"
+                }
+              },
+              {
+                "label": "Tipo de Identificador",
+                "content": {
+                  "|$|data": {
+                    "fnKey": "concatText",
+                    "params": {
+                      "items": [
+                        {
+                          "|$|text": {
+                            "fnKey": "resolveSwitchCase",
+                            "params": {
+                              "|&|value": "&.item.type",
+                              "cases": [
+                                {
+                                  "condition": "FISHER",
+                                  "value": "Pescador"
+                                },
+                                {
+                                  "condition": "MARKETER",
+                                  "value": "Comercializador de la caleta"
+                                },
+                                {
+                                  "condition": "ORGANIZATION",
+                                  "value": "Organización"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "text": ": "
+                        },
+                        {
+                          "|&|text": "&.item.typeKey"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "comments-to-approve",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Comentarios pendientes",
+          "tableServiceDataStores": [
+            {
+              "key": "comments",
+              "serviceName": "getPendingComments",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.comments",
+            "options": [
+              {
+                "label": "Aprobar",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Aprobar comentario?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "callService",
+                              "params": {
+                                "serviceName": "updateCommentStatus",
+                                "serviceParams": {
+                                  "|&|commentId": "&.item._id",
+                                  "status": "APPROVED"
+                                },
+                                "onSuccess": {
+                                  "fnKey": "reloadBlock"
+                                },
+                                "onError": {
+                                  "fnKey": "showAlert",
+                                  "params": {
+                                    "message": "Error aprobando comentario"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "label": "Rechazar",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Rechazar comentario?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "callService",
+                              "params": {
+                                "serviceName": "updateCommentStatus",
+                                "serviceParams": {
+                                  "|&|commentId": "&.item._id",
+                                  "status": "REJECTED"
+                                },
+                                "onSuccess": {
+                                  "fnKey": "reloadBlock"
+                                },
+                                "onError": {
+                                  "fnKey": "showAlert",
+                                  "params": {
+                                    "message": "Error rechazando comentario"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "mapping": [
+              {
+                "label": "Nombre",
+                "content": {
+                  "|&|data": "&.item.authorName"
+                }
+              },
+              {
+                "label": "Email",
+                "content": {
+                  "|&|data": "&.item.authorEmail"
+                }
+              },
+              {
+                "label": "Comentario",
+                "content": {
+                  "|&|data": "&.item.content"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "user-profile",
+      "params": {
+        "serviceDataStores": [
+          {
+            "key": "userData",
+            "serviceName": "getUserById",
+            "serviceParams": {
+              "|&|userId": "&.currentStateParams.userId"
+            }
+          }
+        ],
+        "blockType": "dashboard",
+        "blockParams": {
+          "rows": [
+            {
+              "type": "title",
+              "setup": {
+                "value": "Datos del usuario"
+              }
+            },
+            {
+              "type": "header-options",
+              "setup": {
+                "items": [
+                  {
+                    "type": "action",
+                    "label": "Actualizar",
+                    "action": {
+                      "fnKey": "reloadBlock"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "card",
+              "setup": {
+                "items": [
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|&|value": "&.serviceDataStores.userData.approvalState"
+                    }
+                  },
+                  {
+                    "type": "title-1",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "joinKey": " ",
+                          "items": [
+                            {
+                              "|&|text": "&.serviceDataStores.userData.name"
+                            },
+                            {
+                              "|&|text": "&.serviceDataStores.userData.lastname"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "title-3",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "default",
+                        "params": {
+                          "defaultValue": "",
+                          "|$|value": {
+                            "fnKey": "concatText",
+                            "params": {
+                              "items": [
+                                {
+                                  "text": "RUT: "
+                                },
+                                {
+                                  "|&|text": "&.serviceDataStores.userData.rut"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "title-3",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "default",
+                        "params": {
+                          "defaultValue": "",
+                          "|&|value": "&.serviceDataStores.userData.email"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "title-3",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "default",
+                        "params": {
+                          "defaultValue": "",
+                          "|&|value": "&.serviceDataStores.userData.phone"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "break"
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Fecha de registro: "
+                            },
+                            {
+                              "|$|text": {
+                                "fnKey": "toDateString",
+                                "params": {
+                                  "|&|date": "&.serviceDataStores.userData._timestamp"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Mensaje: "
+                            },
+                            {
+                              "|&|text": "&.serviceDataStores.userData.message"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Región: "
+                            },
+                            {
+                              "|&|text": "&.serviceDataStores.userData.regionKey"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Ciudad: "
+                            },
+                            {
+                              "|&|text": "&.serviceDataStores.userData.cityKey"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Comuna: "
+                            },
+                            {
+                              "|&|text": "&.serviceDataStores.userData.communeKey"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Sector: "
+                            },
+                            {
+                              "|&|text": "&.serviceDataStores.userData.sectorKey"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "break"
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Foto de perfil"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "image",
+                    "setup": {
+                      "|$|url": {
+                        "fnKey": "default",
+                        "params": {
+                          "|&|value": "&.serviceDataStores.userData.photoUrl",
+                          "defaultValue": "https://www.tibs.org.tw/images/default.jpg"
+                        }
+                      },
+                      "height": "150px"
+                    }
+                  },
+                  {
+                    "type": "paragraph",
+                    "setup": {
+                      "|$|value": {
+                        "fnKey": "concatText",
+                        "params": {
+                          "items": [
+                            {
+                              "text": "Foto de cover"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "image",
+                    "setup": {
+                      "|$|url": {
+                        "fnKey": "default",
+                        "params": {
+                          "|&|value": "&.serviceDataStores.userData.coverUrl",
+                          "defaultValue": "https://www.tibs.org.tw/images/default.jpg"
+                        }
+                      },
+                      "height": "220px"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "header-options",
+              "setup": {
+                "items": [
+                  {
+                    "type": "action",
+                    "label": "Aprobar",
+                    "action": {
+                      "fnKey": "showConfirm",
+                      "params": {
+                        "message": "Aprobar usuario?",
+                        "onAccept": {
+                          "fnKey": "multipleActions",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": {
+                                  "fnKey": "uiShowLoader"
+                                }
+                              },
+                              {
+                                "action": {
+                                  "fnKey": "callService",
+                                  "params": {
+                                    "serviceName": "updateUserApprovalState",
+                                    "serviceParams": {
+                                      "|&|userId": "&.currentStateParams.userId",
+                                      "approvalState": "APPROVED"
+                                    },
+                                    "onSuccess": {
+                                      "fnKey": "goToState",
+                                      "params": {
+                                        "stateName": "user-requests"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "action",
+                    "label": "Rechazar",
+                    "action": {
+                      "fnKey": "showPrompt",
+                      "params": {
+                        "message": "Ingresa el motivo de rechazo",
+                        "onResponse": {
+                          "fnKey": "multipleActions",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": {
+                                  "fnKey": "uiShowLoader"
+                                }
+                              },
+                              {
+                                "action": {
+                                  "fnKey": "callService",
+                                  "params": {
+                                    "serviceName": "updateUserApprovalState",
+                                    "serviceParams": {
+                                      "|&|userId": "&.currentStateParams.userId",
+                                      "approvalState": "REJECTED",
+                                      "|&|approvalStateDescription": "&.promptResponse"
+                                    },
+                                    "onSuccess": {
+                                      "fnKey": "goToState",
+                                      "params": {
+                                        "stateName": "user-requests"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "last-subscribers",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Últimos Suscriptores",
+          "tableServiceDataStores": [
+            {
+              "key": "users",
+              "serviceName": "getLastSubscribers",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.users",
+            "options": [],
+            "mapping": [
+              {
+                "label": "Nombre",
+                "content": {
+                  "|&|data": "&.item.name"
+                }
+              },
+              {
+                "label": "Email",
+                "content": {
+                  "|&|data": "&.item.email"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "register-property",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "form",
+        "blockParams": {
+          "title": "Registrar Nueva Casa",
+          "headerOptions": [],
+          "formItems": [
+            {
+              "type": "input",
+              "setup": {
+                "label": "Ubicación",
+                "outputAlias": "address",
+                "type": "text"
+              }
+            },
+            {
+              "type": "action",
+              "setup": {
+                "label": "Registrar Casa",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Registrar Casa?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "callService",
+                              "params": {
+                                "serviceName": "registerProperty",
+                                "serviceParams": {
+                                  "propertiesGroupId": "5f89d79b645f590008f86773",
+                                  "|&|address": "&.formOutputsMap.address"
+                                },
+                                "onSuccess": {
+                                  "fnKey": "goToState",
+                                  "params": {
+                                    "stateName": "properties"
+                                  }
+                                },
+                                "onError": {
+                                  "fnKey": "showAlert",
+                                  "params": {
+                                    "message": "Error registrando"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "staff-list",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Usuarios",
+          "tableServiceDataStores": [
+            {
+              "key": "users",
+              "serviceName": "getStaffUsersList",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [
+            {
+              "type": "action",
+              "label": "Registrar usuario",
+              "action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "register-staff"
+                }
+              }
+            }
+          ],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.users",
+            "options": [
+              {
+                "label": "Remover",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Remover usuario?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "callService",
+                              "params": {
+                                "serviceName": "removeStaffUser",
+                                "serviceParams": {
+                                  "|&|staffUserId": "&.item._id"
+                                },
+                                "onSuccess": {
+                                  "fnKey": "reloadBlock"
+                                },
+                                "onError": {
+                                  "fnKey": "showAlert",
+                                  "params": {
+                                    "message": "Error removiendo usuario"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "mapping": [
+              {
+                "label": "Nombre",
+                "content": {
+                  "|&|data": "&.item.name"
+                }
+              },
+              {
+                "label": "Email",
+                "content": {
+                  "|&|data": "&.item.email"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "register-staff",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "form",
+        "blockParams": {
+          "title": "Registrar usuario",
+          "headerOptions": [
+            {
+              "type": "action",
+              "label": "Volver a lista de usuarios",
+              "action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "staff-list",
+                  "stateParams": {}
+                }
+              }
+            }
+          ],
+          "formItems": [
+            {
+              "type": "input",
+              "setup": {
+                "label": "Nombre",
+                "outputAlias": "name",
+                "type": "text"
+              }
+            },
+            {
+              "type": "input",
+              "setup": {
+                "label": "Email",
+                "outputAlias": "email",
+                "type": "text"
+              }
+            },
+            {
+              "type": "action",
+              "setup": {
+                "label": "Registrar lead",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Registrar usuario?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "resolveFormFiles",
+                              "params": {
+                                "onResolve": {
+                                  "fnKey": "callService",
+                                  "params": {
+                                    "serviceName": "registerStaffUser",
+                                    "serviceParams": {
+                                      "|&|name": "&.formOutputsMap.name",
+                                      "|&|email": "&.formOutputsMap.email"
+                                    },
+                                    "onSuccess": {
+                                      "fnKey": "goToState",
+                                      "params": {
+                                        "stateName": "staff-list"
+                                      }
+                                    },
+                                    "onError": {
+                                      "fnKey": "showAlert",
+                                      "params": {
+                                        "message": "Error registrando usuario"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

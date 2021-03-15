@@ -1,0 +1,28 @@
+[
+  {
+    "action": "elementsAggregation",
+    "outputAlias": "sessionData",
+    "params": {
+      "modelKey": "staffusersession",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|key": "&.clientCookies.clsk",
+            "disabled": {
+              "$ne": true
+            }
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "redirectWhenMatch",
+    "params": {
+      "|&|match": "&.outputsMap.sessionData.length",
+      "targetWhenMatch": "/admin"
+    },
+    "handlerVersion": "v1"
+  }
+]

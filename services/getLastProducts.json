@@ -1,0 +1,41 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "product",
+      "aggregationPipeline": [
+        {
+          "$sort": {
+            "_timestamp": -1
+          }
+        },
+        {
+          "|&|$skip": "&.clientParams.pageNumber"
+        },
+        {
+          "|&|$limit": "&.clientParams.pageSize"
+        },
+        {
+          "$lookup": {
+            "from": "user",
+            "localField": "userId",
+            "foreignField": "_id",
+            "as": "user"
+          }
+        },
+        {
+          "$unwind": {
+            "path": "$user",
+            "preserveNullAndEmptyArrays": false
+          }
+        },
+        {
+          "$match": {
+            "user.approvalState": "APPROVED"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  }
+]

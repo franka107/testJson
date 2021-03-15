@@ -1,0 +1,34 @@
+[
+  {
+    "action": "sendEmail",
+    "params": {
+      "emailTransporterSetup": {
+        "service": "gmail",
+        "auth": {
+          "email": "contact@ideascloud.io",
+          "password": "co0nt44a4act!"
+        }
+      },
+      "emailSetup": {
+        "originEmail": "no-reply@ideascloud.io",
+        "|&|subject": "&.functionParams.subject",
+        "|&|targetEmail": "&.functionParams.targetEmail"
+      },
+      "emailContent": {
+        "from": "no-reply@ideascloud.io",
+        "template": "basic-email",
+        "|&|attachments": "&.functionParams.attachments",
+        "params": {
+          "backgroundColor": "#FFF",
+          "foregroundColor": "#12498f",
+          "fontColor": "#111111",
+          "containerPadding": "30px",
+          "logoUrl": "https://ic-client-assets.s3.us-east-2.amazonaws.com/manual-inserts/logo_caletaenlinea_azul-v2.png",
+          "|&|paragraphs": "&.functionParams.paragraphs",
+          "|&|buttons": "&.functionParams.buttons"
+        }
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "objectid"
+    },
+    "key": {
+      "type": "string"
+    }
+  },
+  "required": ["userId", "key"]
+}

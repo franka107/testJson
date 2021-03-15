@@ -1,0 +1,79 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "usersession",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|key": "&.clientParams.sessionKey"
+          }
+        },
+        {
+          "$lookup": {
+            "from": "user",
+            "let": {
+              "userId": "$userId"
+            },
+            "pipeline": [
+              {
+                "$match": {
+                  "$expr": {
+                    "$and": [
+                      {
+                        "$eq": ["$_id", "$$userId"]
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "as": "user"
+          }
+        },
+        {
+          "$unwind": {
+            "path": "$user",
+            "preserveNullAndEmptyArrays": false
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "userData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.userData"
+        }
+      },
+      "onError": {
+        "status": 401,
+        "details": "Invalid credentials"
+      }
+    }
+  },
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "product",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|userId": "&.outputsMap.userData.userId"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  }
+]

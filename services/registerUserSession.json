@@ -1,0 +1,86 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "user",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|email": "&.clientParams.email",
+            "disabled": {
+              "$ne": true
+            }
+          }
+        },
+        {
+          "$lookup": {
+            "from": "usercredentials",
+            "let": {
+              "userId": "$_id"
+            },
+            "pipeline": [
+              {
+                "$match": {
+                  "|&|credentials.password": "&.clientParams.password",
+                  "$expr": {
+                    "$and": [
+                      {
+                        "$eq": ["$userId", "$$userId"]
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "as": "credentials"
+          }
+        },
+        {
+          "$unwind": {
+            "path": "$credentials",
+            "preserveNullAndEmptyArrays": false
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "userData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.userData"
+        }
+      },
+      "onError": {
+        "status": 401,
+        "details": "Invalid credentials"
+      }
+    }
+  },
+  {
+    "action": "registerElement",
+    "outputAlias": "usersession",
+    "params": {
+      "modelKey": "usersession",
+      "mappingSetup": {
+        "|&|userId": "&.outputsMap.userData._id",
+        "|$|key": {
+          "fnKey": "generateRandomString",
+          "params": {
+            "size": 30
+          }
+        }
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

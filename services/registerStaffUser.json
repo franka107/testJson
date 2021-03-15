@@ -1,0 +1,71 @@
+[
+  {
+    "action": "registerElement",
+    "outputAlias": "staffuser",
+    "params": {
+      "modelKey": "staffuser",
+      "mappingSetup": {
+        "|&|name": "&.clientParams.name",
+        "|&|email": "&.clientParams.email",
+        "|$|password": {
+          "fnKey": "generateRandomString",
+          "params": {
+            "size": 10
+          }
+        }
+      }
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "executeFunction",
+    "params": {
+      "functionKey": "sendBasicEmail",
+      "params": {
+        "subject": "Bienvenido al equipo administrativo de Caleta en Línea",
+        "|&|targetEmail": "&.outputsMap.staffuser.email",
+        "attachments": [],
+        "paragraphs": [
+          {
+            "text": "Hola! Bienvenido a Caleta en Línea"
+          },
+          {
+            "text": "Para acceder ingresa https://caletaenlinea.cl/staff-login"
+          },
+          {
+            "|$|text": {
+              "fnKey": "concatText",
+              "params": {
+                "items": [
+                  {
+                    "text": "Email: "
+                  },
+                  {
+                    "|&|text": "&.outputsMap.staffuser.email"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "|$|text": {
+              "fnKey": "concatText",
+              "params": {
+                "items": [
+                  {
+                    "text": "Contraseña: "
+                  },
+                  {
+                    "|&|text": "&.outputsMap.staffuser.password"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "buttons": []
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

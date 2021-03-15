@@ -1,0 +1,99 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "usersession",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|key": "&.clientParams.sessionKey"
+          }
+        },
+        {
+          "$lookup": {
+            "from": "user",
+            "let": {
+              "userId": "$userId"
+            },
+            "pipeline": [
+              {
+                "$match": {
+                  "$expr": {
+                    "$and": [
+                      {
+                        "$eq": ["$_id", "$$userId"]
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "as": "user"
+          }
+        },
+        {
+          "$unwind": {
+            "path": "$user",
+            "preserveNullAndEmptyArrays": false
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "userData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.userData"
+        }
+      },
+      "onError": {
+        "status": 401,
+        "details": "Invalid credentials"
+      }
+    }
+  },
+  {
+    "action": "updateElementById",
+    "params": {
+      "modelKey": "user",
+      "itemId": "&.outputsMap.userData.userId",
+      "updateData": {
+        "|&|name": "&.clientParams.name",
+        "|&|lastname": "&.clientParams.lastname",
+        "|&|rut": "&.clientParams.rut",
+        "|&|email": "&.clientParams.email",
+        "|&|phone": "&.clientParams.phone",
+        "|&|mobilePhone": "&.clientParams.mobilePhone",
+        "|&|comment": "&.clientParams.comment",
+        "|&|type": "&.clientParams.type",
+        "|&|typeKey": "&.clientParams.typeKey",
+        "|&|regionKey": "&.clientParams.regionKey",
+        "|&|cityKey": "&.clientParams.cityKey",
+        "|&|communeKey": "&.clientParams.communeKey",
+        "|&|sectorKey": "&.clientParams.sectorKey",
+        "|&|website": "&.clientParams.website",
+        "|&|message": "&.clientParams.message",
+        "|&|photoUrl": "&.clientParams.photoUrl",
+        "|&|coverUrl": "&.clientParams.coverUrl",
+        "|&|gender": "&.clientParams.gender",
+        "|&|businessLine": "&.clientParams.businessLine",
+        "|&|businessLegalName": "&.clientParams.businessLegalName",
+        "|&|deliveryEnabled": "&.clientParams.deliveryEnabled",
+        "|&|personalDeliveryEnabled": "&.clientParams.personalDeliveryEnabled",
+        "|&|termsAccepted": "&.clientParams.termsAccepted",
+        "|&|birthDate": "&.clientParams.birthDate"
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

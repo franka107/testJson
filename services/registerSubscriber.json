@@ -1,0 +1,40 @@
+[
+  {
+    "action": "registerElement",
+    "params": {
+      "modelKey": "subscriber",
+      "mappingSetup": {
+        "|&|name": "&.clientParams.name",
+        "|&|email": "&.clientParams.email"
+      }
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "executeFunction",
+    "params": {
+      "functionKey": "sendBasicEmail",
+      "params": {
+        "subject": "¡Bienvenido/a a Caletaenlinea.cl!",
+        "|&|targetEmail": "&.clientParams.email",
+        "attachments": [],
+        "paragraphs": [
+          {
+            "text": "¡Gracias por registrarte! Ahora formas parte de la red de Pesca Artesanal más grande de Chile. Te mantendremos actualizado/a sobre las novedades y nuevas ofertas de Caletaenlinea.cl."
+          },
+          {
+            "text": "¡Que corra la voz! Comparte con tu familia y amigos/as esta iniciativa que busca fortalecer a las comunidades pesqueras."
+          },
+          {
+            "text": "Saludos,"
+          },
+          {
+            "text": "Equipo Caleta en Línea"
+          }
+        ],
+        "buttons": []
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

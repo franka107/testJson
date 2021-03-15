@@ -1,0 +1,65 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "user",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|$|_id": {
+              "fnKey": "parseData",
+              "params": {
+                "type": "objectid",
+                "|&|data": "&.clientParams.userId"
+              }
+            }
+          }
+        },
+        {
+          "$lookup": {
+            "from": "product",
+            "let": {
+              "userId": "$_id"
+            },
+            "pipeline": [
+              {
+                "$match": {
+                  "$expr": {
+                    "$and": [
+                      {
+                        "$eq": ["$userId", "$$userId"]
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "as": "products"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "userData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.userData"
+        }
+      },
+      "onError": {
+        "status": 404,
+        "details": "Invalid user id"
+      }
+    }
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "visit",
+      "aggregationPipeline": [
+        {
+          "$count": "count"
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "params": {}
+  }
+]
