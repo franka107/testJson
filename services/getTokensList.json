@@ -1,0 +1,16 @@
+[
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "token",
+      "aggregationPipeline": [
+        {
+          "$sort": {
+            "_timestamp": -1
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  }
+]

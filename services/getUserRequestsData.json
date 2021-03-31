@@ -1,11 +1,55 @@
 [
   {
-    "action": "stopIfDoesntMatch",
+    "action": "elementsAggregation",
     "params": {
-      "match": false,
+      "modelKey": "usersession",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|key": "&.clientCookies.sessionKey"
+          }
+        },
+        {
+          "$lookup": {
+            "from": "user",
+            "localField": "userId",
+            "foreignField": "_id",
+            "as": "user"
+          }
+        },
+        {
+          "$unwind": {
+            "path": "$user",
+            "preserveNullAndEmptyArrays": false
+          }
+        },
+        {
+          "$replaceRoot": {
+            "newRoot": "$user"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "userData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.userData"
+        }
+      },
       "onError": {
         "status": 401,
-        "details": "Invalid token"
+        "details": "Invalid session"
       }
     }
   }

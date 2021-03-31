@@ -1,5 +1,18 @@
 [
   {
+    "action": "resolveActionParams",
+    "outputAlias": "newPassword",
+    "params": {
+      "|$|pwd": {
+        "fnKey": "generateRandomString",
+        "params": {
+          "abc": "0123456789ABCDEF",
+          "size": 8
+        }
+      }
+    }
+  },
+  {
     "action": "registerElement",
     "outputAlias": "userData",
     "params": {
@@ -40,10 +53,9 @@
         "type": "PASSWORD",
         "credentials": {
           "|$|password": {
-            "fnKey": "generateRandomString",
+            "fnKey": "encryptText",
             "params": {
-              "abc": "0123456789ABCDEF",
-              "size": 8
+              "|&|text": "&.outputsMap.newPassword.pwd"
             }
           }
         }
@@ -90,7 +102,7 @@
                     "text": "Contraseña: "
                   },
                   {
-                    "|&|text": "&.outputsMap.usercredentials.credentials.password"
+                    "|&|text": "&.outputsMap.newPassword.pwd"
                   }
                 ]
               }

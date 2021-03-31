@@ -382,6 +382,38 @@
           }
         }
       ]
+    },
+    {
+      "label": "API",
+      "icon": "fas fa-key",
+      "childs": [
+        {
+          "label": "Lista de Tokens",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "token-list"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "label": "Configuración de cuenta",
+      "icon": "fas fa-cog",
+      "childs": [
+        {
+          "label": "Cambiar contraseña",
+          "hideIcon": true,
+          "action": {
+            "fnKey": "goToState",
+            "params": {
+              "stateName": "change-password"
+            }
+          }
+        }
+      ]
     }
   ],
   "states": [
@@ -419,24 +451,6 @@
             ],
             "mapping": [
               {
-                "label": "Region",
-                "content": {
-                  "|&|data": "&.item.regionKey"
-                }
-              },
-              {
-                "label": "Comuna",
-                "content": {
-                  "|&|data": "&.item.communeKey"
-                }
-              },
-              {
-                "label": "Caleta",
-                "content": {
-                  "|&|data": "&.item.sectorKey"
-                }
-              },
-              {
                 "label": "Nombres",
                 "content": {
                   "|&|data": "&.item.name"
@@ -464,6 +478,24 @@
                 "label": "Teléfono",
                 "content": {
                   "|&|data": "&.item.phone"
+                }
+              },
+              {
+                "label": "Region",
+                "content": {
+                  "|&|data": "&.item.regionKey"
+                }
+              },
+              {
+                "label": "Comuna",
+                "content": {
+                  "|&|data": "&.item.communeKey"
+                }
+              },
+              {
+                "label": "Caleta",
+                "content": {
+                  "|&|data": "&.item.sectorKey"
                 }
               },
               {
@@ -575,6 +607,24 @@
                 }
               },
               {
+                "label": "Region",
+                "content": {
+                  "|&|data": "&.item.regionKey"
+                }
+              },
+              {
+                "label": "Comuna",
+                "content": {
+                  "|&|data": "&.item.communeKey"
+                }
+              },
+              {
+                "label": "Caleta",
+                "content": {
+                  "|&|data": "&.item.sectorKey"
+                }
+              },
+              {
                 "label": "Tipo de Identificador",
                 "content": {
                   "|$|data": {
@@ -680,6 +730,24 @@
                 "label": "Teléfono",
                 "content": {
                   "|&|data": "&.item.phone"
+                }
+              },
+              {
+                "label": "Region",
+                "content": {
+                  "|&|data": "&.item.regionKey"
+                }
+              },
+              {
+                "label": "Comuna",
+                "content": {
+                  "|&|data": "&.item.communeKey"
+                }
+              },
+              {
+                "label": "Caleta",
+                "content": {
+                  "|&|data": "&.item.sectorKey"
                 }
               },
               {
@@ -1342,6 +1410,95 @@
       }
     },
     {
+      "key": "token-list",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "data-table",
+        "blockParams": {
+          "title": "Tokens",
+          "tableServiceDataStores": [
+            {
+              "key": "tokens",
+              "serviceName": "getTokensList",
+              "serviceParams": {}
+            }
+          ],
+          "headerOptions": [
+            {
+              "type": "action",
+              "label": "Generar token",
+              "action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "generate-token"
+                }
+              }
+            }
+          ],
+          "listSetup": {
+            "|&|source": "&.tableServiceDataStores.tokens",
+            "options": [
+              {
+                "label": "Remover",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Remover token?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "callService",
+                              "params": {
+                                "serviceName": "removeToken",
+                                "serviceParams": {
+                                  "|&|tokenId": "&.item._id"
+                                },
+                                "onSuccess": {
+                                  "fnKey": "reloadBlock"
+                                },
+                                "onError": {
+                                  "fnKey": "showAlert",
+                                  "params": {
+                                    "message": "Error removiendo token"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "mapping": [
+              {
+                "label": "Descripción",
+                "content": {
+                  "|&|data": "&.item.description"
+                }
+              },
+              {
+                "label": "Token",
+                "content": {
+                  "|&|data": "&.item.token"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
       "key": "staff-list",
       "params": {
         "serviceDataStores": [],
@@ -1427,6 +1584,173 @@
               }
             ]
           }
+        }
+      }
+    },
+    {
+      "key": "change-password",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "form",
+        "blockParams": {
+          "title": "Cambiar contraseña",
+          "headerOptions": [],
+          "formItems": [
+            {
+              "type": "input",
+              "setup": {
+                "label": "Contraseña actual",
+                "outputAlias": "currentPassword",
+                "type": "text"
+              }
+            },
+            {
+              "type": "input",
+              "setup": {
+                "label": "Contraseña nueva",
+                "outputAlias": "newPassword",
+                "type": "text"
+              }
+            },
+            {
+              "type": "action",
+              "setup": {
+                "label": "Guardar cambios",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Cambiar contraseña?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "resolveFormFiles",
+                              "params": {
+                                "onResolve": {
+                                  "fnKey": "callService",
+                                  "params": {
+                                    "serviceName": "changePasswordStaffUser",
+                                    "serviceParams": {
+                                      "|&|oldPassword": "&.formOutputsMap.currentPassword",
+                                      "|&|newPassword": "&.formOutputsMap.newPassword"
+                                    },
+                                    "onSuccess": {
+                                      "fnKey": "goToState",
+                                      "params": {
+                                        "stateName": "user-requests"
+                                      }
+                                    },
+                                    "onError": {
+                                      "fnKey": "showAlert",
+                                      "params": {
+                                        "message": "Algo ocurrio al intentar cambiar la contraseña, intente nuevamente."
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "generate-token",
+      "params": {
+        "serviceDataStores": [],
+        "blockType": "form",
+        "blockParams": {
+          "title": "Generar Token",
+          "headerOptions": [
+            {
+              "type": "action",
+              "label": "Volver a lista de tokens",
+              "action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "token-list",
+                  "stateParams": {}
+                }
+              }
+            }
+          ],
+          "formItems": [
+            {
+              "type": "input",
+              "setup": {
+                "label": "Descripción",
+                "outputAlias": "description",
+                "type": "text"
+              }
+            },
+            {
+              "type": "action",
+              "setup": {
+                "label": "Registrar token",
+                "action": {
+                  "fnKey": "showConfirm",
+                  "params": {
+                    "message": "Generar token?",
+                    "onAccept": {
+                      "fnKey": "multipleActions",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": {
+                              "fnKey": "uiShowLoader"
+                            }
+                          },
+                          {
+                            "action": {
+                              "fnKey": "resolveFormFiles",
+                              "params": {
+                                "onResolve": {
+                                  "fnKey": "callService",
+                                  "params": {
+                                    "serviceName": "generateToken",
+                                    "serviceParams": {
+                                      "|&|description": "&.formOutputsMap.description"
+                                    },
+                                    "onSuccess": {
+                                      "fnKey": "goToState",
+                                      "params": {
+                                        "stateName": "token-list"
+                                      }
+                                    },
+                                    "onError": {
+                                      "fnKey": "showAlert",
+                                      "params": {
+                                        "message": "Error generando el token."
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     },

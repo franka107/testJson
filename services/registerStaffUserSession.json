@@ -7,7 +7,12 @@
         {
           "$match": {
             "|&|email": "&.clientParams.email",
-            "|&|password": "&.clientParams.password"
+            "|$|password": {
+              "fnKey": "encryptText",
+              "params": {
+                "|&|text": "&.clientParams.password"
+              }
+            }
           }
         }
       ]

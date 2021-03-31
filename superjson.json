@@ -1,0 +1,218 @@
+{
+  "models": {
+    "comment": {
+      "type": "object",
+      "properties": {
+        "authorName": {
+          "type": "string"
+        },
+        "authorEmail": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": ["authorName", "authorEmail", "content"]
+    },
+    "usersession": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "objectid"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": ["userId", "key"]
+    }
+  },
+  "services": {
+    "changePassword": [
+      {
+        "action": "elementsAggregation",
+        "params": {
+          "modelKey": "usersession",
+          "aggregationPipeline": [
+            {
+              "$match": {
+                "|&|key": "&.clientCookies.sessionKey"
+              }
+            },
+            {
+              "$lookup": {
+                "from": "user",
+                "localField": "userId",
+                "foreignField": "_id",
+                "as": "user"
+              }
+            },
+            {
+              "$unwind": {
+                "path": "$user",
+                "preserveNullAndEmptyArrays": false
+              }
+            },
+            {
+              "$replaceRoot": {
+                "newRoot": "$user"
+              }
+            }
+          ]
+        },
+        "handlerVersion": "v1"
+      },
+      {
+        "action": "resolveFirstElementOfOutputArray",
+        "outputAlias": "userData",
+        "params": {}
+      },
+      {
+        "action": "stopIfDoesntMatch",
+        "outputAlias": "stopIfDoesntMatchOutput",
+        "params": {
+          "|$|match": {
+            "fnKey": "exists",
+            "params": {
+              "|&|value": "&.outputsMap.userData"
+            }
+          },
+          "onError": {
+            "status": 401,
+            "details": "Invalid session"
+          }
+        }
+      },
+      {
+        "action": "elementsAggregation",
+        "params": {
+          "modelKey": "usercredentials",
+          "aggregationPipeline": [
+            {
+              "$match": {
+                "|$|userId": {
+                  "fnKey": "parseData",
+                  "params": {
+                    "type": "objectid",
+                    "|&|data": "&.outputsMap.userData._id"
+                  }
+                },
+                "|$|credentials.password": {
+                  "fnKey": "encryptText",
+                  "params": {
+                    "|&|text": "&.clientParams.oldPassword"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "handlerVersion": "v1"
+      },
+      {
+        "action": "resolveFirstElementOfOutputArray",
+        "outputAlias": "userCredentialsData",
+        "params": {}
+      },
+      {
+        "action": "stopIfDoesntMatch",
+        "outputAlias": "stopIfDoesntMatchOutput",
+        "params": {
+          "|$|match": {
+            "fnKey": "exists",
+            "params": {
+              "|&|value": "&.outputsMap.userCredentialsData"
+            }
+          },
+          "onError": {
+            "status": 401,
+            "details": "Invalid credentials"
+          }
+        }
+      },
+      {
+        "action": "updateElementById",
+        "params": {
+          "modelKey": "usercredentials",
+          "itemId": "&.clientParams.userCredentialsData._id",
+          "updateData": {
+            "|$|credentials.password": {
+              "fnKey": "encryptText",
+              "params": {
+                "|&|text": "&.clientParams.newPassword"
+              }
+            }
+          }
+        },
+        "handlerVersion": "v1"
+      }
+    ],
+
+    "getUserById": [
+      {
+        "action": "elementsAggregation",
+        "params": {
+          "modelKey": "user",
+          "aggregationPipeline": [
+            {
+              "$match": {
+                "|$|_id": {
+                  "fnKey": "parseData",
+                  "params": {
+                    "type": "objectid",
+                    "|&|data": "&.clientParams.userId"
+                  }
+                }
+              }
+            },
+            {
+              "$lookup": {
+                "from": "product",
+                "let": {
+                  "userId": "$_id"
+                },
+                "pipeline": [
+                  {
+                    "$match": {
+                      "$expr": {
+                        "$and": [
+                          {
+                            "$eq": ["$userId", "$$userId"]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ],
+                "as": "products"
+              }
+            }
+          ]
+        },
+        "handlerVersion": "v1"
+      },
+      {
+        "action": "resolveFirstElementOfOutputArray",
+        "outputAlias": "userData",
+        "params": {}
+      },
+      {
+        "action": "stopIfDoesntMatch",
+        "outputAlias": "stopIfDoesntMatchOutput",
+        "params": {
+          "|$|match": {
+            "fnKey": "exists",
+            "params": {
+              "|&|value": "&.outputsMap.userData"
+            }
+          },
+          "onError": {
+            "status": 404,
+            "details": "Invalid user id"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,11 +1,165 @@
 [
   {
-    "action": "stopIfDoesntMatch",
+    "action": "elementsAggregation",
     "params": {
-      "match": false,
+      "modelKey": "token",
+      "aggregationPipeline": [
+        {
+          "$match": {
+            "|&|token": "&.clientCookies.token"
+          }
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "tokenData",
+    "params": {}
+  },
+  {
+    "action": "stopIfDoesntMatch",
+    "outputAlias": "stopIfDoesntMatchOutput",
+    "params": {
+      "|$|match": {
+        "fnKey": "exists",
+        "params": {
+          "|&|value": "&.outputsMap.tokenData"
+        }
+      },
       "onError": {
         "status": 401,
-        "details": "Invalid token"
+        "details": "Invalid session"
+      }
+    }
+  },
+  {
+    "action": "resolveActionParams",
+    "outputAlias": "currentPageParsed",
+    "params": {
+      "|$|value": {
+        "fnKey": "mathOperation",
+        "params": {
+          "operation": "+",
+          "items": [
+            {
+              "|$|value": {
+                "fnKey": "parseData",
+                "params": {
+                  "type": "number",
+                  "|&|data": "&.clientParams.currentPage"
+                }
+              }
+            },
+            {
+              "value": -1
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "action": "elementsAggregation",
+    "outputAlias": "data",
+    "params": {
+      "modelKey": "subscriber",
+      "aggregationPipeline": [
+        {
+          "$sort": {
+            "_timestamp": -1
+          }
+        },
+        {
+          "|$|$skip": {
+            "fnKey": "mathOperation",
+            "params": {
+              "operation": "*",
+              "items": [
+                {
+                  "|$|value": {
+                    "fnKey": "parseData",
+                    "params": {
+                      "type": "number",
+                      "|&|data": "&.clientParams.perPage"
+                    }
+                  }
+                },
+                {
+                  "|&|value": "&.outputsMap.currentPageParsed.value"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "|&|$limit": "&.clientParams.perPage"
+        }
+      ]
+    }
+  },
+  {
+    "action": "elementsAggregation",
+    "params": {
+      "modelKey": "subscriber",
+      "aggregationPipeline": [
+        {
+          "$count": "count"
+        }
+      ]
+    },
+    "handlerVersion": "v1"
+  },
+  {
+    "action": "resolveFirstElementOfOutputArray",
+    "outputAlias": "total",
+    "params": {}
+  },
+  {
+    "action": "resolveActionParams",
+    "params": {
+      "|&|data": "&.outputsMap.data",
+      "|&|total": "&.outputsMap.total.count",
+      "|&|perPage": "&.clientParams.perPage",
+      "|&|currentPage": "&.clientParams.currentPage",
+      "|$|lastPage": {
+        "fnKey": "mathOperation",
+        "params": {
+          "operation": "+",
+          "items": [
+            {
+              "value": 1
+            },
+            {
+              "|$|value": {
+                "fnKey": "mathFloor",
+                "params": {
+                  "|$|value": {
+                    "fnKey": "mathOperation",
+                    "params": {
+                      "operation": "/",
+                      "items": [
+                        {
+                          "|$|value": {
+                            "fnKey": "parseData",
+                            "params": {
+                              "type": "number",
+                              "|&|data": "&.outputsMap.total.count"
+                            }
+                          }
+                        },
+                        {
+                          "|&|value": "&.clientParams.perPage"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
       }
     }
   }

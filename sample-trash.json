@@ -1,0 +1,531 @@
+{
+  title: "Ideas Cloud",
+  favicon: "FAVICON_URL",
+  styling: {
+    rounded: true,
+    inputsBorder: false,
+    inputsBackgroundColor: "#f5f8f9",
+    logoHeight: "50px",
+    logoWidth: null,
+    colorPrimary: "#009688",
+    colorPrimaryDark: "#00796B",
+    colorPrimaryLight: "#B2DFDB",
+    colorAccent: "#FFC107",
+    textColorPrimary: "#212121",
+    textColorSecondary: "#757575",
+    colorDivider: "#BDBDBD",
+    colorIcons: "#FFFFF",
+    windowBackground: "#1A202C",
+    darkMode: true,
+  },
+  static: {
+    logo:
+      "https://ic-core-assets.s3.us-east-2.amazonaws.com/ic-webapps/landing/ic/images/ic-logo-darkgrey.png",
+    footerIcons: [
+      {
+        icon: "fab fa-facebook-f",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "search",
+          },
+        },
+      },
+      {
+        icon: "fab fa-pinterest-p",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "shopping-cart",
+          },
+        },
+      },
+    ],
+    headerIcons: [
+      {
+        icon: "fas fa-search",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "search",
+          },
+        },
+      },
+      {
+        icon: "fas fa-shopping-cart",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "shopping-cart",
+          },
+        },
+      },
+    ],
+    headerButtons: [
+      {
+        label: "Home",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "home",
+          },
+        },
+      },
+      {
+        label: "Contact",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "home",
+          },
+        },
+      },
+      {
+        label: "Blog",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "blog",
+          },
+        },
+        childs: [
+          {
+            label: "Noticias semanales",
+            "|#|fn": {
+              fnKey: "goToState",
+              params: {
+                stateName: "enterprise",
+              },
+            },
+          },
+          {
+            label: "Importante",
+            "|#|fn": {
+              fnKey: "goToState",
+              params: {
+                stateName: "workers",
+              },
+            },
+          },
+        ],
+      },
+      {
+        label: "About",
+        "|#|fn": {
+          fnKey: "goToState",
+          params: {
+            stateName: "about",
+          },
+        },
+        childs: [
+          {
+            label: "Nuestra empresa",
+            "|#|fn": {
+              fnKey: "goToState",
+              params: {
+                stateName: "enterprise",
+              },
+            },
+          },
+          {
+            label: "Nuestros trabajadores",
+            "|#|fn": {
+              fnKey: "goToState",
+              params: {
+                stateName: "workers",
+              },
+            },
+          },
+        ],
+      },
+    ],
+    leftItems: [
+      {
+        label: "Dashboard",
+        icon: "fa fa-dashboard",
+        action: {
+          fnKey: "goToState",
+          params: {
+            stateName: "dashboard",
+          },
+        },
+      },
+      {
+        label: "Usuarios",
+        icon: "fa fa-users",
+        childs: [
+          {
+            label: "Lista de usuarios",
+            hideIcon: true,
+            action: {
+              fnKey: "goToState",
+              params: {
+                stateName: "user-list",
+              },
+            },
+          },
+          {
+            label: "Crear usuario",
+            hideIcon: true,
+            action: {
+              fnKey: "goToState",
+              params: {
+                stateName: "user-create",
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+  states: [
+    {
+      key: "dashboard",
+      params: {
+        stores: [],
+        content: {
+          blockType: "dashboard",
+          blockParams: {
+            title: "Dashboard",
+            rows: [
+              {
+                setup: {
+                  value: "Overview",
+                },
+                type: "title",
+              },
+              {
+                setup: {
+                  items: [
+                    {
+                      chart: {
+                        type: "doughtnut",
+                        data: {
+                          datasets: [
+                            {
+                              backgroundColor: [
+                                "#3e76df",
+                                "#1147ac",
+                                "#1f4285",
+                                "#4b78cd",
+                                "#2d96de",
+                                "#1980bd",
+                                "#327196",
+                                "#25a3dd",
+                              ],
+                              "|$|_backgroundColor": {
+                                fnKey: "arrayRootMap",
+                                params: {
+                                  mappingSetup: {
+                                    "|&|rootValue": "&.item.status.color",
+                                  },
+                                  "|&|array":
+                                    "&.serviceDataStores.report.leadStatusDistribution",
+                                },
+                              },
+                              "|$|data": {
+                                fnKey: "arrayRootMap",
+                                params: {
+                                  mappingSetup: {
+                                    "|&|rootValue": "&.item.count",
+                                  },
+                                  "|&|array":
+                                    "&.serviceDataStores.overviewData.mostUsedWebapps",
+                                },
+                              },
+                              _data: [1, 2, 3, 4, 5],
+                            },
+                          ],
+                          "|$|labels": {
+                            fnKey: "arrayRootMap",
+                            params: {
+                              mappingSetup: {
+                                "|&|rootValue": "&.item.webappKey",
+                              },
+                              "|&|array":
+                                "&.serviceDataStores.overviewData.mostUsedWebapps",
+                            },
+                          },
+                        },
+                        options: {
+                          legend: {
+                            labels: {
+                              fontFamily: "Poppins",
+                              position: "right",
+                            },
+                          },
+                          responsive: true,
+                        },
+                      },
+                      label: "Most Requested Apps",
+                    },
+                  ],
+                },
+                type: "charts",
+              },
+            ],
+          },
+        },
+      },
+    },
+    {
+      key: "user-list",
+      params: {
+        content: {
+          blockType: "data-table",
+          blockParams: {
+            title: "Tokens",
+            tableServiceDataStores: [
+              {
+                key: "tokens",
+                serviceName: "getTokensList",
+                serviceParams: {},
+              },
+            ],
+            headerOptions: [
+              {
+                type: "action",
+                label: "Generar token",
+                action: {
+                  fnKey: "goToState",
+                  params: {
+                    stateName: "generate-token",
+                  },
+                },
+              },
+              {
+                type: "input",
+                input: {
+                  type: "select",
+                  options: [
+                    {
+                      default: false,
+                      value: 1,
+                      label: "Desaprobados"
+                    },
+                    {
+                      default: true,
+                      value: 0,
+                      label: "Aprovados"
+                    }
+                  ]
+                },
+                label: "Generar token",
+                action: {
+                  fnKey: "goToState",
+                  params: {
+                    stateName: "generate-token",
+                  },
+                },
+              },
+            ],
+            listSetup: {
+              "|&|source": "&.tableServiceDataStores.tokens",
+              options: [
+                {
+                  label: "Remover",
+                  action: {
+                    fnKey: "showConfirm",
+                    params: {
+                      message: "Remover token?",
+                      onAccept: {
+                        fnKey: "multipleActions",
+                        params: {
+                          actions: [
+                            {
+                              action: {
+                                fnKey: "uiShowLoader",
+                              },
+                            },
+                            {
+                              action: {
+                                fnKey: "callService",
+                                params: {
+                                  serviceName: "removeToken",
+                                  serviceParams: {
+                                    "|&|tokenId": "&.item._id",
+                                  },
+                                  onSuccess: {
+                                    fnKey: "reloadBlock",
+                                  },
+                                  onError: {
+                                    fnKey: "showAlert",
+                                    params: {
+                                      message: "Error removiendo token",
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+              ],
+              mapping: [
+                {
+                  label: "Descripción",
+                  content: {
+                    "|&|data": "&.item.description",
+                  },
+                },
+                {
+                  label: "Token",
+                  content: {
+                    "|&|data": "&.item.token",
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+    {
+      key: "user-create",
+      params: {
+        stores: [],
+        content: {
+          title: "List Users",
+        },
+      },
+    },
+    {
+      key: "user-delete",
+      params: {
+        stores: [],
+        content: {
+          title: "List Users",
+        },
+      },
+    },
+    {
+      key: "user-detail",
+      params: {
+        stores: [],
+        content: {
+          title: "List Users",
+        },
+      },
+    },
+    {
+      key: "login",
+      params: {
+        stores: [],
+        content: {
+          title: "Login",
+          inputs: [
+            {
+              key: "email",
+              label: "Email",
+              type: "email",
+              placeholder: "user@domain.com",
+            },
+            {
+              key: "password",
+              label: "Password",
+              type: "password",
+              placeholder: "*********",
+            },
+          ],
+          buttons: [
+            {
+              label: "Forgot password? Click here",
+              position: "left",
+              "|#|action": {
+                fnKey: "goToState",
+                params: {
+                  stateName: "register",
+                },
+              },
+            },
+            {
+              label: "Login",
+              type: "main",
+              position: "center",
+              highlighted: true,
+              "|#|action": {
+                fnKey: "consoleLog",
+                params: {
+                  "|&|formParm": "&.stateStores.formValues",
+                },
+              },
+            },
+            {
+              label: "Create an account",
+              position: "center",
+              "|#|action": {
+                fnKey: "goToState",
+                params: {
+                  stateName: "register",
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+
+    {
+      key: "register",
+      params: {
+        stores: [],
+        content: {
+          title: "Register",
+          inputs: [
+            {
+              key: "name",
+              label: "Name",
+              type: "text",
+              placeholder: "John",
+            },
+            {
+              key: "lastname",
+              label: "Lastname",
+              type: "text",
+              placeholder: "Smith",
+            },
+            {
+              key: "email",
+              label: "Email",
+              type: "email",
+              placeholder: "user@domain.com",
+            },
+            {
+              key: "password",
+              label: "Password",
+              type: "password",
+              placeholder: "*********",
+            },
+          ],
+          buttons: [
+            {
+              label: "Register",
+              type: "main",
+              position: "center",
+              highlighted: true,
+              "|#|action": {
+                fnKey: "consoleLog",
+                params: {
+                  "|&|formParm": "&.stateStores.formValues",
+                },
+              },
+            },
+            {
+              label: "Login to account",
+              position: "center",
+              "|#|action": {
+                fnKey: "goToState",
+                params: {
+                  stateName: "login",
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+  ],
+}

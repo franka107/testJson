@@ -1,0 +1,10 @@
+[
+  {
+    "action": "removeElementById",
+    "params": {
+      "modelKey": "token",
+      "itemId": "&.clientParams.tokenId"
+    },
+    "handlerVersion": "v1"
+  }
+]

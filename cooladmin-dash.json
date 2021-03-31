@@ -1,0 +1,484 @@
+{
+  "title": "Ideas Cloud",
+  "favicon": "FAVICON_URL",
+  "styling": {
+    "rounded": true,
+    "inputsBorder": false,
+    "inputsBackgroundColor": "#f5f8f9",
+    "logoHeight": "50px",
+    "logoWidth": null,
+    "colorPrimary": "#009688",
+    "colorPrimaryDark": "#00796B",
+    "colorPrimaryLight": "#B2DFDB",
+    "colorAccent": "#FFC107",
+    "textColorPrimary": "#212121",
+    "textColorSecondary": "#757575",
+    "colorDivider": "#BDBDBD",
+    "colorIcons": "#FFFFF",
+    "windowBackground": "#1A202C",
+    "darkMode": true
+  },
+  "static": {
+    "logo": "https://ic-core-assets.s3.us-east-2.amazonaws.com/ic-webapps/landing/ic/images/ic-logo-darkgrey.png",
+    "leftItems": [
+      {
+        "label": "Dashboard",
+        "icon": "fa fa-dashboard",
+        "action": {
+          "fnKey": "goToState",
+          "params": {
+            "stateName": "dashboard"
+          }
+        }
+      },
+      {
+        "label": "Usuarios",
+        "icon": "fa fa-users",
+        "childs": [
+          {
+            "label": "User List",
+            "hideIcon": true,
+            "action": {
+              "fnKey": "goToState",
+              "params": {
+                "stateName": "user-list"
+              }
+            }
+          },
+          {
+            "label": "Create User",
+            "hideIcon": true,
+            "action": {
+              "fnKey": "goToState",
+              "params": {
+                "stateName": "user-create"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "states": [
+    {
+      "key": "dashboard",
+      "params": {
+        "stores": [],
+        "content": {
+          "blockType": "dashboard",
+          "blockParams": {
+            "title": "Dashboard",
+            "rows": [
+              {
+                "setup": {
+                  "value": "Overview"
+                },
+                "type": "title"
+              },
+              {
+                "setup": {
+                  "items": [
+                    {
+                      "chart": {
+                        "type": "doughtnut",
+                        "data": {
+                          "datasets": [
+                            {
+                              "backgroundColor": [
+                                "#3e76df",
+                                "#1147ac",
+                                "#1f4285",
+                                "#4b78cd",
+                                "#2d96de",
+                                "#1980bd",
+                                "#327196",
+                                "#25a3dd"
+                              ],
+                              "|$|_backgroundColor": {
+                                "fnKey": "arrayRootMap",
+                                "params": {
+                                  "mappingSetup": {
+                                    "|&|rootValue": "&.item.status.color"
+                                  },
+                                  "|&|array": "&.serviceDataStores.report.leadStatusDistribution"
+                                }
+                              },
+                              "|$|data": {
+                                "fnKey": "arrayRootMap",
+                                "params": {
+                                  "mappingSetup": {
+                                    "|&|rootValue": "&.item.count"
+                                  },
+                                  "|&|array": "&.serviceDataStores.overviewData.mostUsedWebapps"
+                                }
+                              },
+                              "_data": [1, 2, 3, 4, 5]
+                            }
+                          ],
+                          "|$|labels": {
+                            "fnKey": "arrayRootMap",
+                            "params": {
+                              "mappingSetup": {
+                                "|&|rootValue": "&.item.webappKey"
+                              },
+                              "|&|array": "&.serviceDataStores.overviewData.mostUsedWebapps"
+                            }
+                          }
+                        },
+                        "options": {
+                          "legend": {
+                            "labels": {
+                              "fontFamily": "Poppins",
+                              "position": "right"
+                            }
+                          },
+                          "responsive": true
+                        }
+                      },
+                      "label": "Most Requested Apps"
+                    }
+                  ]
+                },
+                "type": "charts"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "user-list",
+      "params": {
+        "content": {
+          "blockType": "data-table",
+          "blockParams": {
+            "title": "Users",
+            "tableServiceDataStores": [
+              {
+                "key": "users",
+                "serviceName": "getAllUsers",
+                "serviceParams": {}
+              }
+            ],
+            "headerOptions": [
+              {
+                "type": "action",
+                "label": "New User",
+                "action": {
+                  "fnKey": "goToState",
+                  "params": {
+                    "stateName": "user-create"
+                  }
+                }
+              },
+              {
+                "type": "input",
+                "input": {
+                  "type": "select",
+                  "options": [
+                    {
+                      "default": false,
+                      "value": 1,
+                      "label": "Desaprobados"
+                    },
+                    {
+                      "default": true,
+                      "value": 0,
+                      "label": "Aprovados"
+                    }
+                  ]
+                }
+              }
+            ],
+            "listSetup": {
+              "|&|source": "&.tableServiceDataStores.tokens",
+              "options": [
+                {
+                  "label": "Remover",
+                  "action": {
+                    "fnKey": "showConfirm",
+                    "params": {
+                      "message": "Remover token?",
+                      "onAccept": {
+                        "fnKey": "multipleActions",
+                        "params": {
+                          "actions": [
+                            {
+                              "action": {
+                                "fnKey": "uiShowLoader"
+                              }
+                            },
+                            {
+                              "action": {
+                                "fnKey": "callService",
+                                "params": {
+                                  "serviceName": "removeToken",
+                                  "serviceParams": {
+                                    "|&|tokenId": "&.item._id"
+                                  },
+                                  "onSuccess": {
+                                    "fnKey": "reloadBlock"
+                                  },
+                                  "onError": {
+                                    "fnKey": "showAlert",
+                                    "params": {
+                                      "message": "Error removiendo token"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "mapping": [
+                {
+                  "label": "Descripción",
+                  "content": {
+                    "|&|data": "&.item.description"
+                  }
+                },
+                {
+                  "label": "Token",
+                  "content": {
+                    "|&|data": "&.item.token"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "key": "user-create",
+      "params": {
+        "stores": [],
+        "content": {
+          "blockType": "form",
+          "blockParams": {
+            "title": "New User",
+            "serviceDataStores": [],
+            "headerOptions": [
+              {
+                "type": "action",
+                "label": "Volver a a lista de usuarios",
+                "action": {
+                  "fnKey": "goToState",
+                  "params": {
+                    "stateName": "user-list",
+                    "stateParams": {}
+                  }
+                }
+              }
+            ],
+            "formItems": [
+              {
+                "setup": {
+                  "label": "Email",
+                  "outputAlias": "email",
+                  "type": "text"
+                },
+                "type": "input"
+              },
+              {
+                "setup": {
+                  "label": "Password",
+                  "outputAlias": "password",
+                  "type": "password"
+                },
+                "type": "input"
+              },
+              {
+                "setup": {
+                  "label": "Create user",
+                  "action": {
+                    "fnKey": "showConfirm",
+                    "params": {
+                      "message": "Create User?",
+                      "onAccept": {
+                        "fnKey": "multipleActions",
+                        "params": {
+                          "actions": [
+                            {
+                              "fnKey": "uiShowLoader",
+                              "params": {
+                                "|&|asdDate": "&.currentDate"
+                              }
+                            },
+                            {
+                              "fnKey": "callService",
+                              "params": {
+                                "onError": {
+                                  "fnKey": "showAlert",
+                                  "params": {
+                                    "message": "Error creating user"
+                                  }
+                                },
+                                "onSuccess": {
+                                  "fnKey": "goToState",
+                                  "params": {
+                                    "stateName": "user-list",
+                                    "stateParams": {}
+                                  }
+                                },
+                                "serviceName": "createUser",
+                                "serviceParams": {
+                                  "|&|email": "&.formOutputsMap.email",
+                                  "|&|password": "&.formOutputsMap.password"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": "action"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "key": "user-delete",
+      "params": {
+        "stores": [],
+        "content": {
+          "title": "List Users"
+        }
+      }
+    },
+    {
+      "key": "user-detail",
+      "params": {
+        "stores": [],
+        "content": {
+          "title": "List Users"
+        }
+      }
+    },
+    {
+      "key": "login",
+      "params": {
+        "stores": [],
+        "content": {
+          "title": "Login",
+          "inputs": [
+            {
+              "key": "email",
+              "label": "Email",
+              "type": "email",
+              "placeholder": "user@domain.com"
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "placeholder": "*********"
+            }
+          ],
+          "buttons": [
+            {
+              "label": "Forgot password? Click here",
+              "position": "left",
+              "|#|action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "register"
+                }
+              }
+            },
+            {
+              "label": "Login",
+              "type": "main",
+              "position": "center",
+              "highlighted": true,
+              "|#|action": {
+                "fnKey": "consoleLog",
+                "params": {
+                  "|&|formParm": "&.stateStores.formValues"
+                }
+              }
+            },
+            {
+              "label": "Create an account",
+              "position": "center",
+              "|#|action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "register"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "register",
+      "params": {
+        "stores": [],
+        "content": {
+          "title": "Register",
+          "inputs": [
+            {
+              "key": "name",
+              "label": "Name",
+              "type": "text",
+              "placeholder": "John"
+            },
+            {
+              "key": "lastname",
+              "label": "Lastname",
+              "type": "text",
+              "placeholder": "Smith"
+            },
+            {
+              "key": "email",
+              "label": "Email",
+              "type": "email",
+              "placeholder": "user@domain.com"
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "placeholder": "*********"
+            }
+          ],
+          "buttons": [
+            {
+              "label": "Register",
+              "type": "main",
+              "position": "center",
+              "highlighted": true,
+              "|#|action": {
+                "fnKey": "consoleLog",
+                "params": {
+                  "|&|formParm": "&.stateStores.formValues"
+                }
+              }
+            },
+            {
+              "label": "Login to account",
+              "position": "center",
+              "|#|action": {
+                "fnKey": "goToState",
+                "params": {
+                  "stateName": "login"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

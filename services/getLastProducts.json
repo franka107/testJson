@@ -5,8 +5,13 @@
       "modelKey": "product",
       "aggregationPipeline": [
         {
+          "$match": {
+            "|&|regionKey": "&.clientParams.regionKey"
+          }
+        },
+        {
           "$sort": {
-            "_timestamp": -1
+            "_id": -1
           }
         },
         {

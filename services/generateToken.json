@@ -1,0 +1,19 @@
+[
+  {
+    "action": "registerElement",
+    "outputAlias": "token",
+    "params": {
+      "modelKey": "token",
+      "mappingSetup": {
+        "|&|description": "&.clientParams.description",
+        "|$|token": {
+          "fnKey": "generateRandomString",
+          "params": {
+            "size": 40
+          }
+        }
+      }
+    },
+    "handlerVersion": "v1"
+  }
+]

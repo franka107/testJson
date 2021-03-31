@@ -21,7 +21,12 @@
             "pipeline": [
               {
                 "$match": {
-                  "|&|credentials.password": "&.clientParams.password",
+                  "|$|credentials.password": {
+                    "fnKey": "encryptText",
+                    "params": {
+                      "|&|text": "&.clientParams.password"
+                    }
+                  },
                   "$expr": {
                     "$and": [
                       {
